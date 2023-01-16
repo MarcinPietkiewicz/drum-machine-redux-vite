@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./App.css";
 import {useAppDispatch, useAppSelector} from './app/hooks';
-import {togglePower} from './features/power/power-slice'
+import {togglePower} from './features/power/power-slice';
+import {setVolume} from './features/volume/volume-slice';
 import DrumBox from "./DrumBox";
 import Display from "./Display";
 import PowerButton from "./PowerButton";
@@ -10,11 +11,12 @@ import VolumeControl from "./VolumeControl";
 function App() {
 
   const power = useAppSelector(state => state.power.value);
+  const volume = useAppSelector(state => state.volume.value);
   const dispatch = useAppDispatch();
   // const [power, setPower] = useState(false);
+  // const [volume, setVolume] = useState(1);
 
   const [display, setDisplay] = useState("");
-  const [volume, setVolume] = useState(1);
   const timerRef = useRef(null);
   useEffect(() => {
     updateDisplay("Click power button to start", 4000);
@@ -29,6 +31,7 @@ function App() {
     updateDisplay(text);
   }
 
+
   const updateDisplay = (text, time = 1000) => {
     if (timerRef.current == null) {
       setDisplayTimer(text, time);
@@ -39,7 +42,8 @@ function App() {
   };
 
   const updateVolume = (volume, volumeText) => {
-    setVolume(volume);
+    dispatch(setVolume(volume))
+    // setVolume(volume);
     if (power === true) {
       updateDisplay(volumeText);
     }

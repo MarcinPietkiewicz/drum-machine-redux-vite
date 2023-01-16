@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import powerReducer from '../features/power/power-slice';
+import volumeReducer from '../features/volume/volume-slice'
 
 
 export const store = configureStore({
     reducer: {
-        power: powerReducer
+        power: powerReducer,
+        volume: volumeReducer,
     },
 })
 
