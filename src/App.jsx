@@ -1,25 +1,31 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./App.css";
+import {useAppDispatch, useAppSelector} from './app/hooks';
+import {togglePower} from './features/power/power-slice'
 import DrumBox from "./DrumBox";
 import Display from "./Display";
 import PowerButton from "./PowerButton";
 import VolumeControl from "./VolumeControl";
 
 function App() {
+
+  const power = useAppSelector(state => state.power.value);
+  const dispatch = useAppDispatch();
+  // const [power, setPower] = useState(false);
+
   const [display, setDisplay] = useState("");
-  const [power, setPower] = useState(false);
   const [volume, setVolume] = useState(1);
   const timerRef = useRef(null);
   useEffect(() => {
     updateDisplay("Click power button to start", 4000);
   }, []);
 
-  function togglePower() {
+  function setPower() {
     let text = "";
     if (power === false) {
       text = "Hello";
     } else text = "Goodbye";
-    setPower(!power);
+    dispatch(togglePower());
     updateDisplay(text);
   }
 
@@ -53,7 +59,7 @@ function App() {
         <DrumBox upDisplay={updateDisplay} power={power} volume={volume} />
         <Display display={display} />
         <VolumeControl volume={volume} updateVolume={updateVolume} />
-        <PowerButton powerSwitch={togglePower} />
+        <PowerButton powerSwitch={setPower} />
       </div>
     </div>
   );
