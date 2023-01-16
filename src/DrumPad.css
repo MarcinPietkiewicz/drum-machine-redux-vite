@@ -1,0 +1,27 @@
+.drum-pad {
+  width: 100%;
+  height: 100%;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 900;
+  font-size: 1.5em;
+  user-select: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.inactive {
+  background: lightcyan;
+  background: radial-gradient(circle, #454545 0%, #333 100%);
+  box-shadow: 2px 3px 1px 0px rgba(66, 68, 90, 1);
+}
+
+.active {
+  background: darkorange;
+  background: radial-gradient(circle, #ffcd82 0%, rgb(216, 137, 35) 100%);
+  box-shadow: 2px 3px 1px 0px rgb(194, 159, 64);
+}

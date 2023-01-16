@@ -1,0 +1,45 @@
+.volume-control {
+  border-radius: 5px;
+  background-color: transparent;
+  background: url("assets/slider.png");
+  grid-column: 1 / 3;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-size: 84%;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.volume-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 10px;
+  background: transparent;
+  outline: none;
+}
+
+.volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 41px;
+  height: 59px;
+  border: 0;
+  background: url("assets/knob.png");
+  background-size: contain;
+  background-position: center center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+.volume-slider::-moz-range-thumb {
+  width: 41px;
+  height: 59px;
+  border: 0;
+  background: url("assets/knob.png");
+  background-size: contain;
+  background-position: center centert;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
