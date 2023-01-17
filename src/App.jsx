@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import "./App.css";
 import {useAppDispatch, useAppSelector} from './app/hooks';
 import {togglePower} from './features/power/power-slice';
 import {setVolume} from './features/volume/volume-slice';
+import {updateDisplay} from './features/display/display-slice';
 import DrumBox from "./DrumBox";
 import Display from "./Display";
 import PowerButton from "./PowerButton";
@@ -13,11 +14,10 @@ function App() {
   const power = useAppSelector(state => state.power.value);
   const volume = useAppSelector(state => state.volume.value);
   const dispatch = useAppDispatch();
-
-  const [display, setDisplay] = useState("");
   const timerRef = useRef(null);
+
   useEffect(() => {
-    updateDisplay("Click power button to start", 4000);
+    updateDisplayAndCheckTimer("Click power button to start", 4000);
   }, []);
 
   function setPower() {
@@ -26,11 +26,11 @@ function App() {
       text = "Hello";
     } else text = "Goodbye";
     dispatch(togglePower());
-    updateDisplay(text);
+    updateDisplayAndCheckTimer(text);
   }
 
 
-  const updateDisplay = (text, time = 1000) => {
+  const updateDisplayAndCheckTimer = (text, time = 1000) => {
     if (timerRef.current == null) {
       setDisplayTimer(text, time);
     } else {
@@ -42,14 +42,14 @@ function App() {
   const updateVolume = (volume, volumeText) => {
     dispatch(setVolume(volume))
     if (power === true) {
-      updateDisplay(volumeText);
+      updateDisplayAndCheckTimer(volumeText);
     }
   };
 
   function setDisplayTimer(text, time = 1000) {
-    setDisplay(text);
+    dispatch(updateDisplay(text))
     timerRef.current = setTimeout(() => {
-      setDisplay("");
+      dispatch(updateDisplay(""))
     }, time);
   }
 
@@ -57,8 +57,8 @@ function App() {
     <div id="center-container">
       <div className="glow" id="drum-machine">
         <div id="header">Drum Machine Redux</div>
-        <DrumBox upDisplay={updateDisplay} />
-        <Display display={display} />
+        <DrumBox upDisplay={updateDisplayAndCheckTimer} />
+        <Display />
         <VolumeControl volume={volume} updateVolume={updateVolume} />
         <PowerButton powerSwitch={setPower} />
       </div>
