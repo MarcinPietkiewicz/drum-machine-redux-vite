@@ -1,6 +1,7 @@
 import "./VolumeControl.css";
 
 function VolumeControl(props) {
+  
   function changeVolume(event) {
     const volume = event.target.value;
     const volumeText = "Volume: " + volume;

@@ -1,6 +1,6 @@
 import "./DrumPad.css";
 import { useState } from "react";
-import { useAppSelector} from './app/hooks'
+import { useAppSelector } from './app/hooks'
 
 
 function DrumPad(props) {
