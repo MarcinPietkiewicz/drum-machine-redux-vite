@@ -1,16 +1,20 @@
 import "./DrumPad.css";
 import { useState } from "react";
+import { useAppSelector} from './app/hooks'
+
 
 function DrumPad(props) {
   const [state, setState] = useState("inactive");
+  const power = useAppSelector(state => state.power.value);
+  const volume = useAppSelector(state => state.volume.value);
 
   function playSoundAndHighlight() {
-    if (props.power === true) {
+    if (power === true) {
       const sound = document.getElementById(props.keyTrigger);
       highlightButton();
       updateDisplay(props.clipId);
       sound.currentTime = 0;
-      sound.volume = props.volume;
+      sound.volume = volume;
       sound.play();
     }
   }

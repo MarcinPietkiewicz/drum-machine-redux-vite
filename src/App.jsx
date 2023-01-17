@@ -13,8 +13,6 @@ function App() {
   const power = useAppSelector(state => state.power.value);
   const volume = useAppSelector(state => state.volume.value);
   const dispatch = useAppDispatch();
-  // const [power, setPower] = useState(false);
-  // const [volume, setVolume] = useState(1);
 
   const [display, setDisplay] = useState("");
   const timerRef = useRef(null);
@@ -43,7 +41,6 @@ function App() {
 
   const updateVolume = (volume, volumeText) => {
     dispatch(setVolume(volume))
-    // setVolume(volume);
     if (power === true) {
       updateDisplay(volumeText);
     }
@@ -60,7 +57,7 @@ function App() {
     <div id="center-container">
       <div className="glow" id="drum-machine">
         <div id="header">Drum Machine Redux</div>
-        <DrumBox upDisplay={updateDisplay} power={power} volume={volume} />
+        <DrumBox upDisplay={updateDisplay} />
         <Display display={display} />
         <VolumeControl volume={volume} updateVolume={updateVolume} />
         <PowerButton powerSwitch={setPower} />
